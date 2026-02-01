@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Удобство 58 - Премиальная мебель</title>
   
   <!-- Внешние стили -->
@@ -409,6 +409,23 @@
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .filter-tags::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .filter-tags::-webkit-scrollbar-track {
+      background: var(--light-gray);
+      border-radius: 2px;
+    }
+
+    .filter-tags::-webkit-scrollbar-thumb {
+      background: var(--gray);
+      border-radius: 2px;
     }
 
     .filter-tag {
@@ -420,6 +437,8 @@
       cursor: pointer;
       transition: var(--transition);
       color: var(--text-secondary);
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .filter-tag:hover {
@@ -673,12 +692,16 @@
 
     .cart-item-info {
       flex: 1;
+      min-width: 0; /* Предотвращает переполнение */
     }
 
     .cart-item-title {
       font-weight: 600;
       margin-bottom: 8px;
       color: var(--text-color);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .cart-item-price {
@@ -892,6 +915,7 @@
       display: flex;
       gap: 15px;
       margin-top: 15px;
+      flex-wrap: wrap;
     }
 
     .color-option {
@@ -901,6 +925,7 @@
       cursor: pointer;
       border: 3px solid transparent;
       transition: var(--transition);
+      flex-shrink: 0;
     }
 
     .color-option.selected {
@@ -993,6 +1018,21 @@
       position: relative;
       flex-wrap: nowrap;
       overflow-x: auto;
+      padding-bottom: 10px;
+    }
+
+    .configurator-steps::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .configurator-steps::-webkit-scrollbar-track {
+      background: var(--light-gray);
+      border-radius: 2px;
+    }
+
+    .configurator-steps::-webkit-scrollbar-thumb {
+      background: var(--gray);
+      border-radius: 2px;
     }
 
     .configurator-steps::before {
@@ -1233,6 +1273,8 @@
         box-shadow: var(--shadow);
         border-top: 1px solid var(--border-color);
         z-index: 1000;
+        max-height: 80vh;
+        overflow-y: auto;
       }
 
       .nav-links.active {
@@ -1330,6 +1372,7 @@
 
       .filter-tags {
         gap: 8px;
+        padding-bottom: 15px;
       }
 
       .filter-tag {
@@ -1399,6 +1442,24 @@
       .step-content {
         padding: 20px;
       }
+      
+      .room-control-group {
+        margin-bottom: 20px;
+      }
+      
+      .furniture-selector {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      
+      .furniture-option {
+        padding: 12px;
+        font-size: 14px;
+      }
+      
+      .furniture-option i {
+        font-size: 24px;
+      }
     }
 
     @media (max-width: 576px) {
@@ -1441,6 +1502,7 @@
 
       .cart-item-actions {
         justify-content: center;
+        flex-wrap: wrap;
       }
 
       .modal {
@@ -1460,6 +1522,7 @@
       
       .product-image {
         height: 200px;
+        font-size: 60px;
       }
       
       .page-title {
@@ -1500,6 +1563,15 @@
       
       .furniture-option i {
         font-size: 24px;
+      }
+      
+      .configurator-steps::before {
+        display: none;
+      }
+      
+      .configurator-steps {
+        justify-content: flex-start;
+        gap: 10px;
       }
     }
 
@@ -1576,6 +1648,22 @@
       .modal {
         padding: 20px 15px;
       }
+      
+      .nav-link span {
+        display: none;
+      }
+      
+      .nav-link i {
+        font-size: 18px;
+      }
+      
+      .cart-sidebar {
+        width: 100%;
+      }
+      
+      .room-controls {
+        overflow: hidden;
+      }
     }
 
     @media (max-width: 400px) {
@@ -1625,17 +1713,36 @@
       
       .room-visualization {
         padding: 12px;
+        min-height: 400px;
       }
       
       .profile-sidebar,
       .profile-content {
         padding: 15px;
       }
+      
+      .logo span {
+        display: none;
+      }
+      
+      .nav-link {
+        padding: 12px;
+      }
+      
+      .filter-tags {
+        margin-bottom: 10px;
+      }
     }
 
     @media (max-width: 360px) {
-      .logo span {
-        display: none;
+      .logo {
+        min-width: auto;
+      }
+      
+      .logo-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
       }
       
       .user-actions {
@@ -1647,6 +1754,12 @@
         font-size: 13px;
       }
       
+      .btn-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+      }
+      
       .page-icon {
         width: 45px;
         height: 45px;
@@ -1654,7 +1767,7 @@
       }
       
       .filter-tags {
-        justify-content: center;
+        justify-content: flex-start;
       }
       
       .filter-tag {
@@ -1665,6 +1778,90 @@
       .product-image {
         height: 180px;
         font-size: 60px;
+      }
+      
+      .product-content {
+        padding: 12px;
+      }
+      
+      .cart-item-image {
+        width: 100px;
+        height: 100px;
+      }
+      
+      .room-controls {
+        padding: 10px;
+      }
+      
+      .room-visualization {
+        padding: 10px;
+        min-height: 350px;
+      }
+      
+      .furniture-option {
+        padding: 8px;
+        font-size: 12px;
+      }
+      
+      .furniture-option i {
+        font-size: 20px;
+      }
+    }
+
+    @media (max-width: 320px) {
+      .container {
+        padding: 0 8px;
+      }
+      
+      .navbar {
+        padding: 0 8px;
+      }
+      
+      .btn {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+      
+      .btn-icon {
+        width: 32px;
+        height: 32px;
+      }
+      
+      .page-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+      
+      .product-image {
+        height: 160px;
+        font-size: 50px;
+      }
+      
+      .product-price {
+        font-size: 18px;
+      }
+      
+      .cart-item-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .quantity-control {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .room-3d-container {
+        min-height: 250px;
+      }
+      
+      .config-option {
+        padding: 12px;
+      }
+      
+      .config-option i {
+        font-size: 36px;
       }
     }
 
@@ -1796,6 +1993,10 @@
       .modal {
         max-height: 80vh;
       }
+      
+      .nav-links.active {
+        max-height: 70vh;
+      }
     }
     
     /* Конфигуратор - дополнительное поле выбора */
@@ -1823,6 +2024,24 @@
       border-color: var(--primary);
       background: rgba(26, 54, 93, 0.05);
     }
+    
+    /* Фикс для переполнения текста */
+    .text-ellipsis {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
+    /* Скрытие текста на очень маленьких экранах */
+    .hide-on-mobile {
+      display: inline;
+    }
+    
+    @media (max-width: 480px) {
+      .hide-on-mobile {
+        display: none;
+      }
+    }
   </style>
 </head>
 
@@ -1833,39 +2052,39 @@
       <div class="logo-icon">
         <i class="fas fa-couch"></i>
       </div>
-      <span>Удобство 58</span>
+      <span class="hide-on-mobile">Удобство 58</span>
     </div>
 
     <div class="nav-links" id="nav-links">
       <a href="#" class="nav-link active" data-page="home">
-        <i class="fas fa-home"></i>Главная
+        <i class="fas fa-home"></i><span class="hide-on-mobile">Главная</span>
       </a>
       <a href="#" class="nav-link" data-page="catalog">
-        <i class="fas fa-th-large"></i>Каталог
+        <i class="fas fa-th-large"></i><span class="hide-on-mobile">Каталог</span>
       </a>
       <a href="#" class="nav-link" data-page="profile">
-        <i class="fas fa-user"></i>Профиль
+        <i class="fas fa-user"></i><span class="hide-on-mobile">Профиль</span>
       </a>
       <a href="#" class="nav-link" data-page="about">
-        <i class="fas fa-info-circle"></i>О нас
+        <i class="fas fa-info-circle"></i><span class="hide-on-mobile">О нас</span>
       </a>
       <a href="#" class="nav-link" data-page="fitting">
-        <i class="fas fa-cube"></i>3D Примерка
+        <i class="fas fa-cube"></i><span class="hide-on-mobile">3D Примерка</span>
       </a>
       <a href="#" class="nav-link" data-page="configurator">
-        <i class="fas fa-sliders-h"></i>Конфигуратор
+        <i class="fas fa-sliders-h"></i><span class="hide-on-mobile">Конфигуратор</span>
       </a>
       <a href="#" class="nav-link" data-page="reviews">
-        <i class="fas fa-star"></i>Отзывы
+        <i class="fas fa-star"></i><span class="hide-on-mobile">Отзывы</span>
       </a>
       <a href="#" class="nav-link" data-page="contacts">
-        <i class="fas fa-map-marker-alt"></i>Контакты
+        <i class="fas fa-map-marker-alt"></i><span class="hide-on-mobile">Контакты</span>
       </a>
       <a href="#" class="nav-link" data-page="tracking" id="tracking-tab" style="display: none;">
-        <i class="fas fa-shipping-fast"></i>Статус заказа
+        <i class="fas fa-shipping-fast"></i><span class="hide-on-mobile">Статус заказа</span>
       </a>
       <a href="#" class="nav-link" data-page="admin" id="admin-tab" style="display: none;">
-        <i class="fas fa-cog"></i>Админ
+        <i class="fas fa-cog"></i><span class="hide-on-mobile">Админ</span>
       </a>
     </div>
 
@@ -1882,7 +2101,7 @@
       </button>
 
       <button class="btn btn-outline" id="auth-btn" onclick="toggleAuthModal()">
-        <i class="fas fa-sign-in-alt"></i>Войти
+        <i class="fas fa-sign-in-alt"></i><span class="hide-on-mobile">Войти</span>
       </button>
 
       <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
@@ -2869,7 +3088,7 @@
       const profileSubtitle = document.getElementById('profile-subtitle');
       
       if (currentUser) {
-        authBtn.innerHTML = `<i class="fas fa-user"></i>${currentUser.name.split(' ')[0]}`;
+        authBtn.innerHTML = `<i class="fas fa-user"></i><span class="hide-on-mobile">${currentUser.name.split(' ')[0]}</span>`;
         authBtn.onclick = function() {
           if (currentPage !== 'profile') switchPage('profile');
         };
@@ -2888,7 +3107,7 @@
           adminTab.style.display = 'none';
         }
       } else {
-        authBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i>Войти';
+        authBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i><span class="hide-on-mobile">Войти</span>';
         authBtn.onclick = toggleAuthModal;
         if (logoutBtn) logoutBtn.style.display = 'none';
         if (loginProfileBtn) loginProfileBtn.style.display = 'block';
